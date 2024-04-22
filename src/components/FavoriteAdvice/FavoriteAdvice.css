@@ -1,0 +1,30 @@
+.fav-advice-container {
+    background-color: var(--darkGrayishBlue);
+    padding: 16px;
+    border-radius: 8px;
+    color: var(--lightCyan);
+    margin-bottom: 12px;
+    position: relative;
+}
+
+.fav-advice-id {
+    color: var(--neonGreen);
+    margin-bottom: 8px;
+}
+
+.fav-advice-date {
+    position: absolute;
+    top: 16px;
+    right: 8px;
+    font-size: 12px;
+}
+
+.fav-advice-delete-button {
+    background-color: transparent;
+    border: none;
+    color: var( --neonGreen);
+    position: absolute;
+    bottom: 4px;
+    right: -4px;
+    cursor: pointer;
+}

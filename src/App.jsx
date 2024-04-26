@@ -14,8 +14,18 @@ const App = () => {
   });
   const [isLoading, setIsLoading] = useState(false);
   const [isOpen, setIsOpen] = useState(false);
-  const [favoriteAdvices, setFavoriteAdvices] = useState([]);
   const [isInFavorites, setIsInFavorites] = useState(false);
+
+
+  const favoriteAdvicesFromLocalStorage = JSON.parse(
+    localStorage.getItem('favoritedAdvicesLS'),
+  );
+
+ const [favoriteAdvices, setFavoriteAdvices] = useState(
+  favoriteAdvicesFromLocalStorage === null ? [] : favoriteAdvicesFromLocalStorage,
+);
+
+
 
   const handleGenerateAdvice = async () => {
     setIsLoading(true);
@@ -54,6 +64,9 @@ const App = () => {
      
       setFavoriteAdvices(newFavoriteAdvices);
       setIsInFavorites(false);
+      localStorage.setItem(
+        'favoritedAdvicesLS',
+        JSON.stringify(newFavoriteAdvices),);
     } else {
       // adauga advice
       const newFavoriteAdvices = [
@@ -66,6 +79,10 @@ const App = () => {
       ];
       setFavoriteAdvices(newFavoriteAdvices);
       setIsInFavorites(true);
+      localStorage.setItem(
+        'favoritedAdvicesLS',
+        JSON.stringify(newFavoriteAdvices),
+      );
     }
   };
 
@@ -101,10 +118,10 @@ const App = () => {
           onClick={handleAddAdviceToFavorites}
           className="toggle-favorite-button"
         >
-           {isInFavorites ? (
-            <FavoriteIcon style={{ color: '#52ffa8' }} />
+           {getAdviceIndex() === -1 ? (
+             <FavoriteBorderIcon style={{ color: '#52ffa8' }} />
           ) : (
-            <FavoriteBorderIcon style={{ color: '#52ffa8' }} />
+            <FavoriteIcon style={{ color: '#52ffa8' }} />
           )} 
           </button>
         <p className="advice-id"> ADVICE #{advice.id} </p>
